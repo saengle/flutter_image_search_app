@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:inflearn_flutter_image_search_app/data/photo_provider.dart';
 import 'package:inflearn_flutter_image_search_app/model/Photo.dart';
 
-import '../data/api.dart';
 import 'widget/image_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,8 +15,6 @@ class _HomeScreenState extends State<HomeScreen> {
   final _controller = TextEditingController();
   List<Photo> _photos = [];
 
-  final api = PixabayApi();
-
   @override
   void dispose() {
     _controller.dispose();
@@ -25,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final photoProvider = PhotoProvider.of(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -44,7 +43,8 @@ class _HomeScreenState extends State<HomeScreen> {
               decoration: InputDecoration(
                 suffixIcon: IconButton(
                     onPressed: () async {
-                      final photos = await api.fetch(_controller.text);
+                      final photos =
+                          await photoProvider.api.fetch(_controller.text);
                       setState(() {
                         _photos = photos;
                       });
@@ -57,18 +57,17 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Expanded(
             child: GridView.builder(
-                padding: const EdgeInsets.all(16),
-                itemCount: _photos.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16),
-                itemBuilder: (context, index) {
-                  final photo = _photos[index];
-                  return ImageWidget(
-                    photo: photo,
-                  );
-                }),
+              padding: const EdgeInsets.all(16),
+              itemCount: _photos.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, crossAxisSpacing: 16, mainAxisSpacing: 16),
+              itemBuilder: (context, index) {
+                final photo = _photos[index];
+                return ImageWidget(
+                  photo: photo,
+                );
+              },
+            ),
           )
         ],
       ),
