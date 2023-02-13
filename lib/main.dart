@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:inflearn_flutter_image_search_app/data/photo_provider.dart';
 import 'package:inflearn_flutter_image_search_app/ui/home_view_model.dart';
 
-import 'data/api.dart';
+import 'data/pixabay_api.dart';
 import 'ui/home_screen.dart';
 
 void main() {
