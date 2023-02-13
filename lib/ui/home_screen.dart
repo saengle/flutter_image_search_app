@@ -1,4 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:inflearn_flutter_image_search_app/model/Photo.dart';
+import 'package:http/http.dart' as http;
+import 'package:inflearn_flutter_image_search_app/env/env.dart';
+import 'widget/image_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -8,6 +14,24 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final _controller = TextEditingController();
+  List<Photo> _photos = [];
+
+  Future<List<Photo>> fetch(String query) async {
+    final response = await http.get(Uri.parse(
+        'https://pixabay.com/api/?key=${Env.Image_Key}&q=$query&image_type=photo&pretty=true'));
+
+    Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+    Iterable hits = jsonResponse['hits'];
+    return hits.map((e) => Photo.fromJson(e)).toList();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,9 +49,16 @@ class _HomeScreenState extends State<HomeScreen> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
+              controller: _controller,
               decoration: InputDecoration(
                 suffixIcon: IconButton(
-                    onPressed: () {}, icon: const Icon(Icons.search)),
+                    onPressed: () async {
+                      final photos = await fetch(_controller.text);
+                      setState(() {
+                        _photos = photos;
+                      });
+                    },
+                    icon: const Icon(Icons.search)),
                 border: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10))),
               ),
@@ -36,18 +67,15 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             child: GridView.builder(
                 padding: const EdgeInsets.all(16),
-                itemCount: 10,
+                itemCount: _photos.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16),
                 itemBuilder: (context, index) {
-                  return Container(
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(16)),
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                'https://img.vogue.co.kr/vogue/2021/02/style_6020aef125358.jpg'))),
+                  final photo = _photos[index];
+                  return ImageWidget(
+                    photo: photo,
                   );
                 }),
           )

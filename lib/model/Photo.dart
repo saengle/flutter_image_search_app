@@ -1,77 +1,52 @@
-class AutoGenerate {
-  AutoGenerate({
-    required this.total,
-    required this.totalHits,
-    required this.hits,
-  });
-  late final int total;
-  late final int totalHits;
-  late final List<Hits> hits;
+class Photo {
+  int? id;
+  String? pageURL;
+  String? type;
+  String? tags;
+  String? previewURL;
+  int? previewWidth;
+  int? previewHeight;
+  String? webformatURL;
+  int? webformatWidth;
+  int? webformatHeight;
+  String? largeImageURL;
+  int? imageWidth;
+  int? imageHeight;
+  int? imageSize;
+  int? views;
+  int? downloads;
+  int? collections;
+  int? likes;
+  int? comments;
+  int? userId;
+  String? user;
+  String? userImageURL;
 
-  AutoGenerate.fromJson(Map<String, dynamic> json){
-    total = json['total'];
-    totalHits = json['totalHits'];
-    hits = List.from(json['hits']).map((e)=>Hits.fromJson(e)).toList();
-  }
+  Photo(
+      {this.id,
+        this.pageURL,
+        this.type,
+        this.tags,
+        this.previewURL,
+        this.previewWidth,
+        this.previewHeight,
+        this.webformatURL,
+        this.webformatWidth,
+        this.webformatHeight,
+        this.largeImageURL,
+        this.imageWidth,
+        this.imageHeight,
+        this.imageSize,
+        this.views,
+        this.downloads,
+        this.collections,
+        this.likes,
+        this.comments,
+        this.userId,
+        this.user,
+        this.userImageURL});
 
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['total'] = total;
-    _data['totalHits'] = totalHits;
-    _data['hits'] = hits.map((e)=>e.toJson()).toList();
-    return _data;
-  }
-}
-
-class Hits {
-  Hits({
-    required this.id,
-    required this.pageURL,
-    required this.type,
-    required this.tags,
-    required this.previewURL,
-    required this.previewWidth,
-    required this.previewHeight,
-    required this.webformatURL,
-    required this.webformatWidth,
-    required this.webformatHeight,
-    required this.largeImageURL,
-    required this.imageWidth,
-    required this.imageHeight,
-    required this.imageSize,
-    required this.views,
-    required this.downloads,
-    required this.collections,
-    required this.likes,
-    required this.comments,
-    required this.userId,
-    required this.user,
-    required this.userImageURL,
-  });
-  late final int id;
-  late final String pageURL;
-  late final String type;
-  late final String tags;
-  late final String previewURL;
-  late final int previewWidth;
-  late final int previewHeight;
-  late final String webformatURL;
-  late final int webformatWidth;
-  late final int webformatHeight;
-  late final String largeImageURL;
-  late final int imageWidth;
-  late final int imageHeight;
-  late final int imageSize;
-  late final int views;
-  late final int downloads;
-  late final int collections;
-  late final int likes;
-  late final int comments;
-  late final int userId;
-  late final String user;
-  late final String userImageURL;
-
-  Hits.fromJson(Map<String, dynamic> json){
+  Photo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     pageURL = json['pageURL'];
     type = json['type'];
@@ -97,29 +72,29 @@ class Hits {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['id'] = id;
-    _data['pageURL'] = pageURL;
-    _data['type'] = type;
-    _data['tags'] = tags;
-    _data['previewURL'] = previewURL;
-    _data['previewWidth'] = previewWidth;
-    _data['previewHeight'] = previewHeight;
-    _data['webformatURL'] = webformatURL;
-    _data['webformatWidth'] = webformatWidth;
-    _data['webformatHeight'] = webformatHeight;
-    _data['largeImageURL'] = largeImageURL;
-    _data['imageWidth'] = imageWidth;
-    _data['imageHeight'] = imageHeight;
-    _data['imageSize'] = imageSize;
-    _data['views'] = views;
-    _data['downloads'] = downloads;
-    _data['collections'] = collections;
-    _data['likes'] = likes;
-    _data['comments'] = comments;
-    _data['user_id'] = userId;
-    _data['user'] = user;
-    _data['userImageURL'] = userImageURL;
-    return _data;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['pageURL'] = this.pageURL;
+    data['type'] = this.type;
+    data['tags'] = this.tags;
+    data['previewURL'] = this.previewURL;
+    data['previewWidth'] = this.previewWidth;
+    data['previewHeight'] = this.previewHeight;
+    data['webformatURL'] = this.webformatURL;
+    data['webformatWidth'] = this.webformatWidth;
+    data['webformatHeight'] = this.webformatHeight;
+    data['largeImageURL'] = this.largeImageURL;
+    data['imageWidth'] = this.imageWidth;
+    data['imageHeight'] = this.imageHeight;
+    data['imageSize'] = this.imageSize;
+    data['views'] = this.views;
+    data['downloads'] = this.downloads;
+    data['collections'] = this.collections;
+    data['likes'] = this.likes;
+    data['comments'] = this.comments;
+    data['user_id'] = this.userId;
+    data['user'] = this.user;
+    data['userImageURL'] = this.userImageURL;
+    return data;
   }
 }
