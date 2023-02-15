@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:inflearn_flutter_image_search_app/data/photo_api_repository.dart';
 import 'package:inflearn_flutter_image_search_app/data/pixabay_api.dart';
@@ -7,18 +9,9 @@ import 'package:inflearn_flutter_image_search_app/ui/home_view_model.dart';
 void main() {
   test('Stream이 잘 동작해야 한다.', () async {
     final viewModel = HomeViewModel(FakePhotoApiRepository());
-
+    final List<Photo> result = fakeJson.map((e) => Photo.fromJson(e)).toList();
     await viewModel.fetch('apple');
-    expect(
-      viewModel.photoStream,
-      emitsInOrder(
-        [
-          equals([]),
-          equals(fakeJson.map((e) => Photo.fromJson(e)).toList()),
-        ],
-      ),
-    );
-
+    expect(viewModel.photos, result);
   });
 }
 
