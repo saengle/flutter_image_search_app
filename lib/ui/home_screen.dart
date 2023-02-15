@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inflearn_flutter_image_search_app/data/photo_provider.dart';
-import 'package:inflearn_flutter_image_search_app/model/Photo.dart';
+import 'package:inflearn_flutter_image_search_app/model/photo.dart';
 
 import 'widget/image_widget.dart';
 

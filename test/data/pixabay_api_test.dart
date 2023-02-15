@@ -1,11 +1,10 @@
-// import 'dart:html';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart';
 import 'package:http/testing.dart';
 import 'package:inflearn_flutter_image_search_app/data/pixabay_api.dart';
 import 'package:inflearn_flutter_image_search_app/env/env.dart';
-import 'package:inflearn_flutter_image_search_app/model/Photo.dart';
+import 'package:inflearn_flutter_image_search_app/model/photo.dart';
 
 
 // https://velog.io/@jsoh/Flutter-MockClient-%EB%A1%9C-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BD%94%EB%93%9C-%EC%9E%91%EC%84%B1

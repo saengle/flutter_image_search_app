@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:inflearn_flutter_image_search_app/data/photo_api_repository.dart';
 
 import '../env/env.dart';
-import '../model/Photo.dart';
+import '../model/photo.dart';
 
 import 'package:http/http.dart' as http;
 
