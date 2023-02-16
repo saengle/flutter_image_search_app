@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:inflearn_flutter_image_search_app/model/photo.dart';
-import 'package:inflearn_flutter_image_search_app/ui/home_view_model.dart';
+
+import 'package:inflearn_flutter_image_search_app/presentation/home/home_view_model.dart';
 import 'package:provider/provider.dart';
 
-import 'widget/image_widget.dart';
+import 'components/image_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);

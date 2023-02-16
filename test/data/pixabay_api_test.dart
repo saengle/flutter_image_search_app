@@ -2,9 +2,10 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart';
 import 'package:http/testing.dart';
-import 'package:inflearn_flutter_image_search_app/data/pixabay_api.dart';
+import 'package:inflearn_flutter_image_search_app/data/data_source/pixabay_api.dart';
+import 'package:inflearn_flutter_image_search_app/data/repository/photo_api_repository_impl.dart';
 import 'package:inflearn_flutter_image_search_app/env/env.dart';
-import 'package:inflearn_flutter_image_search_app/model/photo.dart';
+import 'package:inflearn_flutter_image_search_app/domain/model/photo.dart';
 
 
 // https://velog.io/@jsoh/Flutter-MockClient-%EB%A1%9C-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BD%94%EB%93%9C-%EC%9E%91%EC%84%B1
@@ -22,9 +23,9 @@ void main() {
         return Response('error', 404);
       });
 
-      final api = PixabayApi();
+      final api = PhotoApiRepositoryimpl(PixabayApi(mockClient));
       //실행
-      final List<Photo> result = await api.fetch('apple', client: mockClient);
+      final List<Photo> result = await api.fetch('apple');
       // 검증
 
       expect(result.first.id, 634572);
