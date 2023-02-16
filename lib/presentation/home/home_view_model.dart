@@ -3,6 +3,7 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 
+import '../../data/data_source/result.dart';
 import '../../domain/repository/photo_api_repository.dart';
 import '../../domain/model/photo.dart';
 
@@ -18,9 +19,18 @@ class HomeViewModel with ChangeNotifier {
 
   HomeViewModel(this.repository);
 
+
+
   Future<void> fetch(String query) async {
-    final result = await repository.fetch(query);
-    _photos = result;
-    notifyListeners();
+    final Result<List<Photo>> result = await repository.fetch(query);
+    result.when(
+      success: (result) {
+        _photos = result;
+        notifyListeners();
+      },
+      error: (message) {
+        print('네트워크 에러');
+      },
+    );
   }
 }

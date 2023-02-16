@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart';
 import 'package:http/testing.dart';
 import 'package:inflearn_flutter_image_search_app/data/data_source/pixabay_api.dart';
+import 'package:inflearn_flutter_image_search_app/data/data_source/result.dart';
 import 'package:inflearn_flutter_image_search_app/data/repository/photo_api_repository_impl.dart';
 import 'package:inflearn_flutter_image_search_app/env/env.dart';
 import 'package:inflearn_flutter_image_search_app/domain/model/photo.dart';
@@ -25,10 +26,10 @@ void main() {
 
       final api = PhotoApiRepositoryimpl(PixabayApi(mockClient));
       //실행
-      final List<Photo> result = await api.fetch('apple');
+      final Result<List<Photo>> result = await api.fetch('apple');
       // 검증
 
-      expect(result.first.id, 634572);
+      expect((result as Success<List<Photo>>).data.first.id, 634572);
       // expect(result[0].previewURL, "https://cdn.pixabay.com/photo/2015/02/13/00/43/apples-634572_150.jpg");
       // expect(result.length, 20);
 
